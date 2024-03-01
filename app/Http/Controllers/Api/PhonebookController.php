@@ -7,7 +7,6 @@ use App\Http\Requests\Api\StoreRequest;
 use App\Http\Requests\Api\UpdateRequest;
 use App\Http\Resources\ContactResource;
 use App\Models\Contact;
-use mysql_xdevapi\Result;
 
 class PhonebookController extends Controller
 {
@@ -23,7 +22,7 @@ class PhonebookController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request )
     {
         $create = Contact::create($request -> validated());
         return new ContactResource($create);
