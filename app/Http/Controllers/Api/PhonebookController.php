@@ -7,7 +7,7 @@ use App\Http\Requests\Api\StoreRequest;
 use App\Http\Requests\Api\UpdateRequest;
 use App\Http\Resources\ContactResource;
 use App\Models\Contact;
-use mysql_xdevapi\Result;
+use App\Service\Api\ApiService;
 
 class PhonebookController extends Controller
 {
@@ -23,10 +23,11 @@ class PhonebookController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request , ApiService $service)
     {
-        $create = Contact::create($request -> validated());
-        return new ContactResource($create);
+        $data = $request->validated();
+
+        return $service->store($data);
     }
 
     /**
@@ -40,20 +41,12 @@ class PhonebookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRequest $request, $id,)
+    public function update(UpdateRequest $request, $id, ApiService $service)
     {
         $contact = Contact::findOrFail($id);
         $request->validated();
 
-        $contact->name = $request['name'];
-        $contact->phone = $request['phone'];
-        $contact->category_id = $request['category_id'];
-
-
-        $contact->save();
-
-
-        return  new ContactResource(Contact::findOrFail($id));
+        return $service->update($request, $id, $contact );
     }
 
     /**
