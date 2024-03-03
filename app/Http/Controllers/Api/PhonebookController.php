@@ -16,7 +16,7 @@ class PhonebookController extends Controller
      */
     public function index()
     {
-        return ContactResource::collection(Contact::paginate(10));
+        return ContactResource::collection(Contact::query()->orderBy('created_at')->paginate(10));
 
     }
 
