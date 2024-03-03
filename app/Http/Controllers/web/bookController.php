@@ -12,7 +12,7 @@ class bookController extends Controller
 {
     public function index()
     {
-        $data = Contact::paginate(10);
+        $data = Contact::query()->orderBy('created_at')->paginate(10);
 
         return view('web.main' , ['data' => $data] );
     }
