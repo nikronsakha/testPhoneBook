@@ -7,12 +7,16 @@ use App\Http\Requests\Web\StoreRequest;
 use App\Http\Requests\Web\UpdateRequest;
 use App\Models\Category;
 use App\Models\Contact;
+use Illuminate\Support\Facades\DB;
 
 class bookController extends Controller
 {
     public function index()
     {
         $data = Contact::query()->orderBy('created_at')->paginate(10);
+
+        $data = DB::table('phonebook')->get();
+
 
         return view('web.main' , ['data' => $data] );
     }
