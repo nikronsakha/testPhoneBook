@@ -4,6 +4,9 @@
         <div id="app">
             <h1 class="text-center mb-4">Справочник</h1>
 
+            <div class="mb-3">
+                <a href="{{ route('posts.create') }}" class="btn btn-primary btn-sm">Добавить контакт</a>
+            </div>
 
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -12,6 +15,7 @@
                         <th>Имя</th>
                         <th>Номер телефона</th>
                         <th>Категория</th>
+                        <th>Действия</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -20,6 +24,16 @@
                             <td>{{ $post->name }}</td>
                             <td>{{ $post->phone }}</td>
                             <td>{{ $post->category->title }}</td>
+                            <td>
+                                <form action="{{ route('posts.destroy' , $post->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="border-0 bg-transparent">
+                                        <a class="btn btn-danger btn-sm">Удалить</a>
+                                    </button>
+                                </form>
+                                <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary btn-sm">Редактировать</a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

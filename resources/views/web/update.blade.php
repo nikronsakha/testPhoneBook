@@ -3,7 +3,7 @@
     <main class="container mt-5">
         <div>
             <h2>Редактировать</h2>
-            <form action="{{ route('update' , $post->id)  }}" method="post">
+            <form action="{{ route('posts.update' , $post->id)  }}" method="post">
                 @csrf
                 @method('PATCH')
                 <div class="form-group">

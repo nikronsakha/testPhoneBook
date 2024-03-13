@@ -14,10 +14,6 @@ class bookController extends Controller
     public function index()
     {
         $data = Contact::query()->orderBy('created_at')->paginate(10);
-
-        $data = DB::table('phonebook')->get();
-
-
         return view('web.main' , ['data' => $data] );
     }
 

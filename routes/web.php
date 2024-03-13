@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\web\bookController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [bookController::class,'index'])->name('index');
-Route::get('/posts/create', [bookController::class,'create'])->name('create');
-Route::post('/posts/', [bookController::class,'store'])->name('store');
-Route::get('/posts/{id}/edit', [bookController::class,'edit'])->name('edit');
-Route::patch('/posts/{id}', [bookController::class,'update'])->name('update');
-Route::delete('/posts/{id}', [bookController::class,'destroy'])->name('destroy');
+Route::get('/posts', [bookController::class,'index'])->name('index');
+
+Route::group(['prefix' => 'admin'],function () {
+    Route::resource('posts',AdminController::class);
+});

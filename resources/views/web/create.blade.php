@@ -3,7 +3,7 @@
     <main class="container mt-5">
         <div>
             <h2>Добавить</h2>
-            <form action="{{ route('store') }}" method="post">
+            <form action="{{ route('posts.store') }}" method="post">
                 @csrf
                 @method('POST')
                 <div class="form-group">
