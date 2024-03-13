@@ -15,8 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group(['auth' => 'guest'],function () {
+    Route::get('/posts', [bookController::class,'index'])->name('index');
+});
 Route::get('/posts', [bookController::class,'index'])->name('index');
 
-Route::group(['prefix' => 'admin'],function () {
+Route::group(['prefix' => 'admin' , 'auth' => 'gust'],function () {
     Route::resource('posts',AdminController::class);
 });

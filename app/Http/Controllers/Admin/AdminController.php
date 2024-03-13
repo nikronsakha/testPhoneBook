@@ -16,7 +16,7 @@ class AdminController extends Controller
     public function index()
     {
         $data = Contact::query()->orderBy('created_at')->paginate(10);
-        return view('web.admin' , ['data' => $data] );
+        return view('admin.admin' , ['data' => $data] );
     }
 
     /**
@@ -24,7 +24,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('web.create');
+        return view('admin.create');
     }
 
     /**
@@ -54,7 +54,7 @@ class AdminController extends Controller
     {
 
         $post = Contact::find($id);
-        return view('web.update' , ['post' => $post] );
+        return view('admin.update' , ['post' => $post] );
     }
 
     /**
