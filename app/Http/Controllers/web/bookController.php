@@ -16,40 +16,4 @@ class bookController extends Controller
         $data = Contact::query()->orderBy('created_at')->paginate(10);
         return view('web.main' , ['data' => $data] );
     }
-
-    public function create()
-    {
-        return view('web.create');
-    }
-
-    public function edit($id)
-    {
-        $post = Contact::find($id);
-        return view('web.update' , ['post' => $post] );
-    }
-
-
-    public function store(StoreRequest $request)
-    {
-        $data = $request->validated();
-
-        Contact::firstOrCreate($data);
-
-        return redirect()->route('index');
-    }
-
-
-    public function update(UpdateRequest $request, $id)
-    {
-        $data = $request->validated();
-        $post = Contact::find($id);
-        $post->update($data);
-        return redirect()->route('index');
-    }
-
-    public function destroy(string $id)
-    {
-        Contact::destroy($id);
-        return redirect()->route('index');
-    }
 }
